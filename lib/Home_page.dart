@@ -16,6 +16,8 @@ import 'wishy.dart';
 import 'accy.dart';
 import 'caty.dart';
 import 'carty.dart';
+import 'search_screen.dart';
+import 'package:badges/badges.dart';
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key});
@@ -25,15 +27,14 @@ class Home_page extends StatefulWidget {
 }
 
 class _Home_pageState extends State<Home_page> {
-  var currentPage = DrawerSections.editprofile;
+  var currentPage = DrawerSections.home;
   int myIndex = 0;
-
 
   @override
   Widget build(BuildContext context) {
     var container;
-    if (currentPage == DrawerSections.editprofile) {
-      container = Edit();
+    if (currentPage == DrawerSections.home) {
+      container = Home();
     } else if (currentPage == DrawerSections.savedcardandwallet) {
       container = Cardin();
     } else if (currentPage == DrawerSections.savedadresses) {
@@ -48,34 +49,43 @@ class _Home_pageState extends State<Home_page> {
       container = Sell();
     } else if (currentPage == DrawerSections.about) {
       container = About();
-    }
-    else if (currentPage == DrawerSections.feedback) {
+    } else if (currentPage == DrawerSections.feedback) {
       container = Fed();
-    }
-    else if (currentPage == DrawerSections.home) {
-      container = Home();
-    }
-    else if (currentPage == DrawerSections.wishlist) {
+    } else if (currentPage == DrawerSections.editprofile) {
+      container = Edit();
+    } else if (currentPage == DrawerSections.wishlist) {
       container = Wishlist();
-    }
-    else if (currentPage == DrawerSections.account) {
+    } else if (currentPage == DrawerSections.account) {
       container = Account();
-    }
-    else if (currentPage == DrawerSections.categories) {
+    } else if (currentPage == DrawerSections.categories) {
       container = Categories();
-    }
-    else if (currentPage == DrawerSections.cart) {
-      container = Cart();
+    } else if (currentPage == DrawerSections.cart) {
+      container = Card();
     }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF02AAB0),
-        title: Text('Shopify',
-          style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 25
-          ),
+        title: Text(
+          'Shopify',
+          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
         ),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SearchItems()));
+              },
+              child: Icon(
+                Icons.search,
+                color: kWhiteColor,
+              )),
+          TextButton(
+              onPressed: () {},
+              child: Icon(
+                Icons.shopping_cart_outlined,
+                color: kWhiteColor,
+              ))
+        ],
       ),
       body: container,
       bottomNavigationBar: BottomNavigationBar(
@@ -101,14 +111,19 @@ class _Home_pageState extends State<Home_page> {
         },
         currentIndex: myIndex,
         items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
             label: 'Home',
-        ),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite_border), label: 'WishList'),
-        BottomNavigationBarItem(icon: Icon(Icons.account_box), label: 'Account'),
-        BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Categories'),
-        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: 'Cart'),
-      ],
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'WishList'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_box), label: 'Account'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.category), label: 'Categories'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart), label: 'Cart'),
+        ],
       ),
       drawer: Drawer(
         child: SingleChildScrollView(
@@ -125,5 +140,3 @@ class _Home_pageState extends State<Home_page> {
     );
   }
 }
-
-
