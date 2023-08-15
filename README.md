@@ -1,1 +1,1 @@
-# Shopify
+Content is in Master branch
